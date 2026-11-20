@@ -96,10 +96,14 @@ def main() -> None:
     parser.add_argument("--uf", type=int, action="append", default=None,
                         help="código IBGE da UF (repetível). Padrão: 22 (PI)")
     args = parser.parse_args()
-
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    run(args.uf)
+
+
+def run(ufs: list[int] | None = None) -> None:
+    """Coleta e grava o estoque de cada UF (padrão: 22, Piauí)."""
     session = make_session()
-    for uf in args.uf or [22]:
+    for uf in ufs or [22]:
         save_raw(collect_stock(session, uf), uf)
 
 

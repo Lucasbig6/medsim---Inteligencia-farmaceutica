@@ -34,10 +34,27 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Principais dependências: `pandas`, `numpy`, `scikit-learn`, `geopandas`, `shapely`, `requests`.
+Principais dependências: `pandas`, `pyarrow`, `numpy`, `scikit-learn`, `geopandas`, `shapely`, `requests`.
+
+## Uso
+
+O `main.py` na raiz orquestra as etapas do pipeline:
+
+```bash
+python main.py                  # roda todas as etapas, na ordem
+python main.py ingest --uf 22   # só a ingestão (--uf é repetível; padrão: 22, Piauí)
+python main.py --list           # lista as etapas
+```
+
+A ingestão coleta o estoque da API de Dados Abertos do Ministério da Saúde (BNAFAR/HÓRUS) e grava em `data/bnafar_uf<UF>_<timestamp>.parquet`, com um `.manifest.json` ao lado (contagem, hash, data da coleta). Se os dados forem idênticos aos da última coleta, nada é gravado.
+
+Observação: a API devolve 1200 registros para o Piauí; esse é o total da base para a UF, não um corte da coleta.
 
 ## Estrutura do repositório
 
+- `main.py` — orquestrador do pipeline
+- `ingestion/` — coleta da API BNAFAR/HÓRUS
+- `data/` — dados coletados em Parquet (não versionar)
 - `projeto.md` — proposta completa do projeto (perguntas, arquitetura, limites)
 - `requirements.txt` — dependências do ambiente
 
