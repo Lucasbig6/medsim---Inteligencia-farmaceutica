@@ -1,0 +1,7 @@
+{
+  "source": "https://apidadosabertos.saude.gov.br/daf/estoque-medicamentos-bnafar-horus",
+  "codigo_uf": 22,
+  "collected_at": "2026-11-20T19:52:09.825519+00:00",
+  "n_records": 1200,
+  "sha256": "ecbc8caae729b4c1b59d3adf5d54afdd25b56bb0014953d5ab981403773ccdff"
+}
